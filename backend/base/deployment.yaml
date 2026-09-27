@@ -23,7 +23,7 @@ spec:
             - name: DB_HOST
               value: "todo-app-db.cbym6qeguqg4.ap-south-1.rds.amazonaws.com"
             - name: DB_NAME
-              value: "todoAppDb"
+              value: "TodoAppDb"
             - name: DB_PORT
               value: "5432"
             - name: DB_PASSWORD
