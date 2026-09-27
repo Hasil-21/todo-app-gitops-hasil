@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: todo-backend
+  labels:
+    app: todo-backend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: todo-backend
+  template:
+    metadata:
+      labels:
+        app: todo-backend
+    spec:
+      containers:
+        - name: todo-backend
+          image: 292578125952.dkr.ecr.ap-south-1.amazonaws.com/todo-app-backend
+          ports:
+            - containerPort: 5000
+          env:
+            - name: DB_HOST
+              value: "todo-app-db.cbym6qeguqg4.ap-south-1.rds.amazonaws.com"
+            - name: DB_NAME
+              value: "todoAppDb"
+            - name: DB_PORT
+              value: 5432
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db-credentials
+                  key: password 
+            - name: DB_USER
+              valueFrom: 
+                secretKeyRef:
+                  name: db-credentials
+                  key: username
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "500m"
+              memory: "256Mi"
+
