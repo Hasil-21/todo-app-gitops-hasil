@@ -4,6 +4,8 @@ metadata:
   name: todo-backend
   labels:
     app: todo-backend
+  annotations:
+    alb.ingress.kubernetes.io/healthcheck-path: /health
 spec:
   selector:
       app: todo-backend
