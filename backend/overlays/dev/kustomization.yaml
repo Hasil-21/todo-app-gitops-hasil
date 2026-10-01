@@ -1,13 +1,8 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-
 namespace: todo-app
-
 resources:
   - ../../base
-  
 images:
   - name: 292578125952.dkr.ecr.ap-south-1.amazonaws.com/todo-app-backend
-    newTag: v2
-
-  
+    newTag: e7ee99c
