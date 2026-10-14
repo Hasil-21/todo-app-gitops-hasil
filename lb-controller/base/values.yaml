@@ -1,0 +1,8 @@
+clusterName: todo-app-cluster
+vpcId:
+region: ap-south-1
+serviceAccount:
+  create: true
+  name: aws-load-balancer-controller
+  annotations:
+    eks.amazonaws.com/role.arn: 

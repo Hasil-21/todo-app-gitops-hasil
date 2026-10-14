@@ -1,0 +1,52 @@
+# Password comes from the Secret that ECK generates. Nothing secret lives in Git.
+env:
+  - name: ES_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        name: logs-es-elastic-user
+        key: elastic
+
+resources:
+  requests:
+    cpu: 50m
+    memory: 64Mi
+  limits:
+    memory: 128Mi
+
+config:
+  inputs: |
+    [INPUT]
+        Name              tail
+        Path              /var/log/containers/*.log
+        multiline.parser  docker, cri
+        Tag               kube.*
+        Mem_Buf_Limit     5MB
+        Skip_Long_Lines   On
+
+  filters: |
+    [FILTER]
+        Name                kubernetes
+        Match               kube.*
+        Kube_URL            https://kubernetes.default.svc:443
+        Kube_Tag_Prefix     kube.var.log.containers.
+        Merge_Log           On
+        Keep_Log            Off
+        K8S-Logging.Parser  On
+        K8S-Logging.Exclude On
+
+  outputs: |
+    [OUTPUT]
+        Name                es
+        Match               kube.*
+        Host                logs-es-http.logging.svc
+        Port                9200
+        HTTP_User           elastic
+        HTTP_Passwd         ${ES_PASSWORD}
+        tls                 On
+        tls.verify          Off
+        Logstash_Format     On
+        Logstash_Prefix     k8s
+        Suppress_Type_Name  On
+        Replace_Dots        On
+        Trace_Error         On
+        Retry_Limit         False
