@@ -8,6 +8,7 @@ spec:
   source:
     repoURL: https://github.com/Hasil-21/todo-app-gitops-hasil.git
     targetRevision: main
+    path: monitoring/overlays/dev
     ref: values
   destination:
     server: https://kubernetes.default.svc

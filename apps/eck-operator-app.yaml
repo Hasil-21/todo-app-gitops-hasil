@@ -13,7 +13,7 @@ spec:
     path: eck-operator/overlays/dev
   destination:
     server: https://kubernetes.default.svc
-    name: eck-operator
+    namespace: eck-operator
   syncPolicy:
     automated:
       prune: true
