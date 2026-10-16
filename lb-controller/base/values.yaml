@@ -1,5 +1,5 @@
 clusterName: todo-app-cluster
-vpcId: 	vpc-0713aa7be90bf51c7
+vpcId: vpc-0cac1dc2bc6c05970
 region: ap-south-1
 serviceAccount:
   create: true
