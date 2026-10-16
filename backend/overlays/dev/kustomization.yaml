@@ -5,4 +5,4 @@ resources:
   - ../../base
 images:
   - name: 292578125952.dkr.ecr.ap-south-1.amazonaws.com/todo-app-backend
-    newTag: b2fca52
+    newTag: 10e8757
